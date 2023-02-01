@@ -1,0 +1,43 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Product Manager - Sports Pro";
+    Layout = "_Layout";
+}
+
+<header class="mx-3 mt-3">
+    <div>
+        <h1>
+            Product Manager
+        </h1>
+    </div>
+</header>
+
+<table class="table table-bordered mx-3">
+    <thead>
+        <tr>
+           <th>Code</th>
+           <th>Name</th>
+           <th>Price</th>
+           <th>Release Date</th>
+           <th class=""></th>
+           <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model)
+        {
+            <tr>
+                <td>@product.Code</td>
+                <td>@product.Name</td>
+                <td>$@product.Price</td>
+                <td>@product.ReleaseDate</td>
+                <td><a asp-controller="Edit" asp-route-id="@product.ProductId" class="btn btn-dark">Edit</a></td>
+                <td><a asp-controller="Delete" asp-route-id="@product.ProductId" class="btn btn-dark">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Product" asp-action="Add" class="btn btn-primary mx-3 mt-4">Add Product</a>
+</div>
