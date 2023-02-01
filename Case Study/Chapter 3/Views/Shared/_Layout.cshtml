@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <script defer src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+        li{list-style-type:none;}
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">SportsPro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Product" asp-action="List">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Technician" asp-action="List">Technicians</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Customer" asp-action="List">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Incidents" asp-action="List">Incidents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Registrations" asp-action="List">Registrations</a>
+                        </li>
+                     
+                    </ul>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" id="aboutText" asp-action="Index">About</a>
+                    </li>
+                </div>
+            
+            </div>
+        </nav>
+        @RenderBody()
+        <div class="container text-center">
+            <footer class="footer fixed-bottom bg-dark text-light">
+                © Sports Pro 2023
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
