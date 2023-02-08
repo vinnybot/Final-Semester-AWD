@@ -1,0 +1,30 @@
+﻿@model SalesOrderModel
+
+@{
+    ViewData["Title"] = "Sales Order";
+    Layout = "_Layout";
+}
+
+<header class="mx-5 mt-3">
+    <h1>SalesOrder Database Application</h1>
+</header>
+
+<div class="mx-5 mt-3">
+    <p>
+        A perpetual SQL Server database program
+    </p>
+</div>
+
+<div class="mx-5 mt-3">
+    <h1>Version01</h1>
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a asp-controller="Product" asp-action="List">Manage Products</a></li>
+            <li class="list-group-item">Manage Categories</li>
+            <li class="list-group-item">Manage Vendors</li>
+            <li class="list-group-item">Manage Customers</li>
+            <li class="list-group-item">Manage Employees</li>
+            <li class="list-group-item">Manage Orders</li>
+        </ul>
+    </div>
+</div>
