@@ -1,0 +1,42 @@
+﻿@model List<Technician>
+
+@{
+    ViewData["Title"] = "Technician Manager - Sports Pro";
+    Layout = "_Layout";
+}
+
+<header class="mx-3 mt-3">
+    <div>
+        <h1>
+            Technician Manager
+        </h1>
+    </div>
+</header>
+
+<table class="table table-bordered mx-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var technician in Model)
+        {
+            <tr>
+                <td>@technician.Name</td>
+                <td>@technician.Email</td>
+                <td>@technician.PhoneNumber</td>
+                <td><a asp-controller="Technician" asp-action="Edit" asp-route-id="@technician.TechnicianId" class="btn btn-dark">Edit</a></td>
+                <td><a asp-controller="Technician" asp-action="Delete" asp-route-id="@technician.TechnicianId" class="btn btn-dark">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Technician" asp-action="Add" class="btn btn-primary mx-3 mt-4">Add Technician</a>
+</div>

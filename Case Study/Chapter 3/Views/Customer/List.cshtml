@@ -1,0 +1,42 @@
+﻿@model List<Customer>
+
+@{
+    ViewData["Title"] = "Customer Manager - Sports Pro";
+    Layout = "_Layout";
+}
+
+<header class="mx-3 mt-3">
+    <div>
+        <h1>
+            Customer Manager
+        </h1>
+    </div>
+</header>
+
+<table class="table table-bordered mx-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                <td>@customer.City</td>
+                <td><a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId" class="btn btn-dark">Edit</a></td>
+                <td><a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerId" class="btn btn-dark">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Customer" asp-action="Add" class="btn btn-primary mx-3 mt-4">Add Customer</a>
+</div>

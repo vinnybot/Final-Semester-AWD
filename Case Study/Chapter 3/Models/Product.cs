@@ -16,6 +16,6 @@ namespace Chapter_3.Models
         public decimal? Price { get; set; }
 
         [Required(ErrorMessage = "Please enter release date. ")]
-        public string ReleaseDate { get; set; } = string.Empty;
+        public DateTime ReleaseDate { get; set; } = DateTime.Now;
     }
 }
