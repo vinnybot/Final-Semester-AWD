@@ -47,7 +47,7 @@ namespace FAQ.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FAQ.Models.FAQ", b =>
+            modelBuilder.Entity("FAQ.Models.FAQs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,14 +67,15 @@ namespace FAQ.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TopicId1")
+                    b.Property<string>("TopicId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("TopicId1");
+                    b.HasIndex("TopicId");
 
                     b.ToTable("FAQs");
 
@@ -84,42 +85,48 @@ namespace FAQ.Migrations
                             Id = 1,
                             Answer = "A general purpose object oriented language that uses a concise, Java-like syntax.",
                             CategoryId = "gen",
-                            Question = "What is C#?"
+                            Question = "What is C#?",
+                            TopicId = "cs"
                         },
                         new
                         {
                             Id = 2,
                             Answer = "In 2002.",
                             CategoryId = "hist",
-                            Question = "When was C# first released?"
+                            Question = "When was C# first released?",
+                            TopicId = "cs"
                         },
                         new
                         {
                             Id = 3,
                             Answer = "A general purpose scripting language that executes in a web browser.",
                             CategoryId = "gen",
-                            Question = "What is JavaScript?"
+                            Question = "What is JavaScript?",
+                            TopicId = "js"
                         },
                         new
                         {
                             Id = 4,
                             Answer = "In 1995.",
                             CategoryId = "hist",
-                            Question = "When was JavaScript first released?"
+                            Question = "When was JavaScript first released?",
+                            TopicId = "js"
                         },
                         new
                         {
                             Id = 5,
                             Answer = "A CSS framework for creating responsive web apps for multiple screen sizes.",
                             CategoryId = "gen",
-                            Question = "What is Bootstrap?"
+                            Question = "What is Bootstrap?",
+                            TopicId = "boot"
                         },
                         new
                         {
                             Id = 6,
                             Answer = "In 2011.",
                             CategoryId = "hist",
-                            Question = "When was Bootstrap first released?"
+                            Question = "When was Bootstrap first released?",
+                            TopicId = "boot"
                         });
                 });
 
@@ -154,7 +161,7 @@ namespace FAQ.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FAQ.Models.FAQ", b =>
+            modelBuilder.Entity("FAQ.Models.FAQs", b =>
                 {
                     b.HasOne("FAQ.Models.Category", "Category")
                         .WithMany()
@@ -164,7 +171,9 @@ namespace FAQ.Migrations
 
                     b.HasOne("FAQ.Models.Topic", "Topic")
                         .WithMany()
-                        .HasForeignKey("TopicId1");
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

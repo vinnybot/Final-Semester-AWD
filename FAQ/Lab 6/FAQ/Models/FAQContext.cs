@@ -1,5 +1,4 @@
-﻿using FAQ.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace FAQ.Models
 {
@@ -10,8 +9,7 @@ namespace FAQ.Models
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Topic> Topics { get; set; } = null!;
 
-        public DbSet<FAQ> FAQs { get; set; } = null!;
-
+        public DbSet<FAQs> FAQs { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,8 +22,8 @@ namespace FAQ.Models
                 new Topic { TopicId = "js", Name = "JavaScript" },
                 new Topic { TopicId = "boot", Name = "Bootstrap" }
                 );
-            modelBuilder.Entity<FAQ>().HasData(
-                new FAQ
+            modelBuilder.Entity<FAQs>().HasData(
+                new FAQs
                 {
                     Id = 1,
                     Question = "What is C#?",
@@ -33,7 +31,7 @@ namespace FAQ.Models
                     TopicId = "cs",
                     CategoryId = "gen"
                 },
-                new FAQ
+                new FAQs
                 {
                     Id = 2,
                     Question = "When was C# first released?",
@@ -41,7 +39,7 @@ namespace FAQ.Models
                     TopicId = "cs",
                     CategoryId = "hist"
                 },
-                new FAQ
+                new FAQs
                 {
                     Id = 3,
                     Question = "What is JavaScript?",
@@ -49,7 +47,7 @@ namespace FAQ.Models
                     TopicId = "js",
                     CategoryId = "gen"
                 },
-                new FAQ
+                new FAQs
                 {
                     Id = 4,
                     Question = "When was JavaScript first released?",
@@ -57,7 +55,7 @@ namespace FAQ.Models
                     TopicId = "js",
                     CategoryId = "hist"
                 },
-                new FAQ
+                new FAQs
                 {
                     Id = 5,
                     Question = "What is Bootstrap?",
@@ -65,7 +63,7 @@ namespace FAQ.Models
                     TopicId = "boot",
                     CategoryId = "gen"
                 },
-                new FAQ
+                new FAQs
                 {
                     Id = 6,
                     Question = "When was Bootstrap first released?",
