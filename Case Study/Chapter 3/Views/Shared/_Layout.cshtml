@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string controller =
+    ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string action =
+        ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    string area =
+    ViewContext.RouteData.Values["area"]?.ToString() ?? "";
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -23,19 +32,29 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav w-100">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link
+                            @(controller == "Home" && action == "Index" ? "active" : "")" 
+                            asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Product" asp-action="List">Products</a>
+                            <a class="nav-link
+                            @(controller == "Product" ? "active" : "")"
+                            asp-controller="Product" asp-action="List">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Technician" asp-action="List">Technicians</a>
+                            <a class="nav-link
+                            @(controller == "Technician" ? "active" : "")"
+                            asp-controller="Technician" asp-action="List">Technicians</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Customer" asp-action="List">Customers</a>
+                            <a class="nav-link
+                            @(controller == "Customer" ? "active" : "")"
+                            asp-controller="Customer" asp-action="List">Customers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Incident" asp-action="List">Incidents</a>
+                            <a class="nav-link
+                            @(controller == "Incident" ? "active" : "")"
+                            asp-controller="Incident" asp-action="List">Incidents</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Registrations" asp-action="List">Registrations</a>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Tutorial Page 3";
+    Layout = "_HelpLayout";
+}
+
+<div class="mx-3 mt-3">
+    <h1>Help Page</h1>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+  </li>
+  <li class="nav-item">
+    <a asp-controller="Tutorial" asp-area="Help" asp-action="Index" asp-route-id="Page1" class="nav-link" >Tutorial</a>
+  </li>
+</ul>
+
+<div class="mx-3 mt-3">
+    <h2>Tutorial - Page 3</h2>
+    <p>Here's the third thing you need to know about my website.</p>
+</div>
+
+<a asp-route-id="Page2" class="btn btn-dark mx-3 mt-3">Previous</a>

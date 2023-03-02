@@ -1,0 +1,72 @@
+﻿@model List<Trip>
+
+@{
+    ViewData["Title"] = "My Trip Log";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <a asp-controller="Trip" asp-action="Add" asp-route-id="page1" class="text-decoration-none fw-bold">Add Trip</a>
+</div>
+
+
+<div class="container">
+    <table class="table table-bordered mx-3">
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Accommodations</th>
+                <th>Things To Do</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var Trip in Model)
+            {
+                <tr>
+                    <td>@Trip.Destination</td>
+                    <td>@Trip.StartDate</td>
+                    <td>@Trip.EndDate</td>
+                    <td>
+                        @Trip.Accommodation
+                        @if (!string.IsNullOrEmpty(Trip.AccommodationPhone))
+                        {
+                            <div>
+                                @Trip.AccommodationPhone
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Trip.AccommodationEmail))
+                        {
+                            <div>
+                                @Trip.AccommodationEmail
+                            </div>
+                        }
+                    </td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(Trip.Activity1))
+                        {
+                            <div>
+                                @Trip.Activity1
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Trip.Activity2))
+                        {
+                             <div>
+                                @Trip.Activity2
+                             </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Trip.Activity3))
+                        {
+                                 <div>
+                                @Trip.Activity3
+                                     </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

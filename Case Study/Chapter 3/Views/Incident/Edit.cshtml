@@ -13,23 +13,15 @@
 
     <div class="mb-3 mx-3">
         <label asp-for="CustomerId" class="form-label">Customer</label>
-        <select asp-for="CustomerId" class="form-select">
+        <select asp-for="CustomerId" asp-items=@(new SelectList(ViewBag.Customer, "CustomerId", "Name")) class="form-select">
             <option value="">Select a Customer</option>
-            @foreach(Customer c in ViewBag.Customer)
-            {
-                <option value="@c.CustomerId">@c.Name</option>
-            }
         </select>
     </div>
 
     <div class="mb-3 mx-3">
         <label asp-for="Product" class="form-label">Product</label>
-        <select asp-for="ProductId" class="form-select">
+        <select asp-for="ProductId" asp-items=@(new SelectList(ViewBag.Products, "ProductId", "Name")) class="form-select">
             <option value="">Select a Product</option>
-            @foreach(Product p in ViewBag.Products)
-            {
-                <option value="@p.ProductId">@p.Name</option>
-            }
         </select>
     </div>
 
@@ -45,12 +37,8 @@
 
     <div class="mb-3 mx-3">
         <label asp-for="Technician" class="form-label">Technician</label>
-        <select asp-for="TechnicianId" class="form-select">
+        <select asp-for="TechnicianId" asp-items=@(new SelectList(ViewBag.Technicians, "TechnicianId", "Name")) class="form-select">
             <option value="">Select a Technician</option>
-            @foreach(Technician t in ViewBag.Technicians)
-            {
-                <option value="@t.TechnicianId">@t.Name</option>
-            }
         </select>
     </div>
 

@@ -43,12 +43,8 @@
 
     <div class="mb-3 mx-3">
         <label asp-for="CountryId" class="form-label">Country</label>
-        <select asp-for="CountryId" class="form-select">
-            <option value="">Select a Country</option>
-        @foreach(Country c in ViewBag.Countries)
-        {
-            <option value="@c.CountryId">@c.Name</option>
-        }
+        <select asp-for="CountryId" asp-items=@(new SelectList(ViewBag.Countries, "CountryId", "Name")) class="form-select">
+            <option value="">Select a Country . . . </option>
         </select>
     </div>
 

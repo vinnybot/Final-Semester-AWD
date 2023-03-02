@@ -1,0 +1,41 @@
+﻿@model TripViewModel
+
+@{
+    ViewData["Title"] = "Add Trip - Page 1";
+    ViewBag.SubHeader = "Add Trip Destination and Dates";
+
+    Layout = "_Layout";
+}
+<div class="container">
+    <h2>Add Trip Destination and Dates</h2>
+</div>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Add" method="post">
+    <input type="hidden" asp-for="PageNumber" />
+    <input type="hidden" asp-for="Trip.TripID" />
+
+    <div class="mb-3 mx-4">
+        <label asp-for="Trip.Destination" class="form-label">Destination</label>
+        <input asp-for="Trip.Destination" class="form-control" />
+    </div>
+
+    <div class="mb-3 mx-4">
+        <label asp-for="Trip.Accommodation" class="form-label">Accommodations</label>
+        <input asp-for="Trip.Accommodation" class="form-control" />
+    </div>
+
+    <div class="mb-3 mx-4">
+        <label asp-for="Trip.StartDate" class="form-label">Start Date</label>
+        <input asp-for="Trip.StartDate" class="form-control" />
+    </div>
+
+    <div class="mb-3 mx-4">
+        <label asp-for="Trip.EndDate" class="form-label">End Date</label>
+        <input asp-for="Trip.EndDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-dark mx-3 mt-3">Next</button>
+    <a asp-action="Cancel" class="btn btn-light mt-3 border-dark">Cancel</a>
+</form>
