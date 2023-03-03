@@ -24,27 +24,21 @@
             <th>Quantity</th>
             <th>Category</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var product in Model)
         {
             <tr>
-                <td>@product.Name</td>
-                <td>@product.ShortDescription</td>
-                <td>@product.LongDescription</td>
-                <td>@product.Image</td>
-                <td>$@product.Price</td>
-                <td>@product.Quantity</td>
+                <td>@product.ProductName</td>
+                <td>@product.ProductDescShort</td>
+                <td>@product.ProductDescLong</td>
+                <td>@product.ProductImage</td>
+                <td>$@product.ProductPrice</td>
+                <td>@product.ProductQty</td>
                 <td>@product.Category.Name</td>
-                <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductId" asp-route-slug="@product.Slug" class="btn btn-dark">Edit</a></td>
-                <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductId" asp-route-slug="@product.Slug" class="btn btn-dark">Delete</a></td>
+                <td><a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductID" class="btn btn-dark">Details</a></td>
             </tr>
         }
     </tbody>
 </table>
-
-<div>
-    <a asp-controller="Product" asp-action="Add" class="btn btn-primary mx-3 mt-4">Add Product</a>
-</div>

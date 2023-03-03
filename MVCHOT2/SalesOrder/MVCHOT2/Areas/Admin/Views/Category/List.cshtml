@@ -1,0 +1,33 @@
+﻿@model List<Category>
+
+@{
+    ViewData["Title"] = "Category Manager - Sales Order App";
+}
+
+<header class="mx-3 mt-3">
+    <div>
+        <h1>
+            Category Manager - Admin
+        </h1>
+    </div>
+</header>
+
+<table class="table table-bordered mx-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td><a asp-controller="Category" asp-action="Edit" asp-route-id="@category.CategoryID" class="btn btn-dark">Edit</a></td>
+                <td><a asp-controller="Category" asp-action="Delete" asp-route-id="@category.CategoryID" class="btn btn-dark">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

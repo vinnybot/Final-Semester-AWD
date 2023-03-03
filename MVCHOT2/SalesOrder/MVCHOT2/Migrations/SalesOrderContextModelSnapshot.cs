@@ -24,118 +24,830 @@ namespace MVCHOT2.Migrations
 
             modelBuilder.Entity("MVCHOT2.Models.Category", b =>
                 {
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            CategoryId = "A",
+                            CategoryID = 1,
                             Name = "Accessories"
                         },
                         new
                         {
-                            CategoryId = "C",
+                            CategoryID = 2,
+                            Name = "Bikes"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            Name = "Clothing"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            Name = "Car Racks"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            Name = "Wheels"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
                             Name = "Components"
+                        });
+                });
+
+            modelBuilder.Entity("MVCHOT2.Models.Customer", b =>
+                {
+                    b.Property<int>("CustomerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+
+                    b.Property<string>("CustomerCity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerState")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerStreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerID = 1,
+                            CustomerCity = "Redmond",
+                            CustomerFirstName = "Suzanne",
+                            CustomerLastName = "Viescas",
+                            CustomerPhoneNumber = "425-555-2686",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "15127 NE 24th, #383",
+                            CustomerZipCode = "98052"
+                        },
+                        new
+                        {
+                            CustomerID = 2,
+                            CustomerCity = "Duvall",
+                            CustomerFirstName = "William",
+                            CustomerLastName = "Thompson",
+                            CustomerPhoneNumber = "425-555-2681",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "122 Spring River Drive",
+                            CustomerZipCode = "98019"
+                        },
+                        new
+                        {
+                            CustomerID = 3,
+                            CustomerCity = "Auburn",
+                            CustomerFirstName = "Gary",
+                            CustomerLastName = "Hallmark",
+                            CustomerPhoneNumber = "253-555-2676",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "Route 2 Road",
+                            CustomerZipCode = "98002"
+                        },
+                        new
+                        {
+                            CustomerID = 4,
+                            CustomerCity = "Houston",
+                            CustomerFirstName = "Robert",
+                            CustomerLastName = "Brown",
+                            CustomerPhoneNumber = "713-555-2491",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "672 Lamont Ave",
+                            CustomerZipCode = "77201"
+                        },
+                        new
+                        {
+                            CustomerID = 5,
+                            CustomerCity = "Redmond",
+                            CustomerFirstName = "Dean",
+                            CustomerLastName = "McCrae",
+                            CustomerPhoneNumber = "425-555-2506",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "4110 Redmond Rd.",
+                            CustomerZipCode = "98052"
+                        },
+                        new
+                        {
+                            CustomerID = 6,
+                            CustomerCity = "Redmond",
+                            CustomerFirstName = "John",
+                            CustomerLastName = "Viescas",
+                            CustomerPhoneNumber = "425-555-2511",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "15127 NE 24th, #383",
+                            CustomerZipCode = "98052"
+                        },
+                        new
+                        {
+                            CustomerID = 7,
+                            CustomerCity = "Portland",
+                            CustomerFirstName = "Mariya",
+                            CustomerLastName = "Sergienko",
+                            CustomerPhoneNumber = "503-555-2526",
+                            CustomerState = "OR",
+                            CustomerStreetAddress = "901 Pine Avenue",
+                            CustomerZipCode = "97208"
+                        },
+                        new
+                        {
+                            CustomerID = 8,
+                            CustomerCity = "San Diego",
+                            CustomerFirstName = "Neil",
+                            CustomerLastName = "Patterson",
+                            CustomerPhoneNumber = "619-555-2541",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "233 West Valley Hwy",
+                            CustomerZipCode = "92199"
+                        },
+                        new
+                        {
+                            CustomerID = 9,
+                            CustomerCity = "Seattle",
+                            CustomerFirstName = "Andrew",
+                            CustomerLastName = "Cencini",
+                            CustomerPhoneNumber = "206-555-2601",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "507 - 20th Ave. E. Apt. 2A",
+                            CustomerZipCode = "98105"
+                        },
+                        new
+                        {
+                            CustomerID = 10,
+                            CustomerCity = "Austin",
+                            CustomerFirstName = "Angel",
+                            CustomerLastName = "Kennedy",
+                            CustomerPhoneNumber = "512-555-2571",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "667 Red River Road",
+                            CustomerZipCode = "78710"
+                        },
+                        new
+                        {
+                            CustomerID = 11,
+                            CustomerCity = "Woodinville",
+                            CustomerFirstName = "Alaina",
+                            CustomerLastName = "Hallmark",
+                            CustomerPhoneNumber = "425-555-2631",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "Route 2, Box 203B",
+                            CustomerZipCode = "98072"
+                        },
+                        new
+                        {
+                            CustomerID = 12,
+                            CustomerCity = "Bellevue",
+                            CustomerFirstName = "Liz",
+                            CustomerLastName = "Keyser",
+                            CustomerPhoneNumber = "425-555-2556",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "13920 S.E. 40th Street",
+                            CustomerZipCode = "98006"
+                        },
+                        new
+                        {
+                            CustomerID = 13,
+                            CustomerCity = "San Diego",
+                            CustomerFirstName = "Rachel",
+                            CustomerLastName = "Patterson",
+                            CustomerPhoneNumber = "619-555-2546",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "2114 Longview Lane",
+                            CustomerZipCode = "92199"
+                        },
+                        new
+                        {
+                            CustomerID = 14,
+                            CustomerCity = "Palm Springs",
+                            CustomerFirstName = "Sam",
+                            CustomerLastName = "Abolrous",
+                            CustomerPhoneNumber = "760-555-2611",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "611 Alpine Drive",
+                            CustomerZipCode = "92263"
+                        },
+                        new
+                        {
+                            CustomerID = 15,
+                            CustomerCity = "Chico",
+                            CustomerFirstName = "Darren",
+                            CustomerLastName = "Gehring",
+                            CustomerPhoneNumber = "530-555-2616",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "2601 Seaview Lane",
+                            CustomerZipCode = "95926"
+                        },
+                        new
+                        {
+                            CustomerID = 16,
+                            CustomerCity = "Salem",
+                            CustomerFirstName = "Jim",
+                            CustomerLastName = "Wilson",
+                            CustomerPhoneNumber = "503-555-2636",
+                            CustomerState = "OR",
+                            CustomerStreetAddress = "101 NE 88th",
+                            CustomerZipCode = "97301"
+                        },
+                        new
+                        {
+                            CustomerID = 17,
+                            CustomerCity = "Medford",
+                            CustomerFirstName = "Manuela",
+                            CustomerLastName = "Seidel",
+                            CustomerPhoneNumber = "541-555-2641",
+                            CustomerState = "OR",
+                            CustomerStreetAddress = "66 Spring Valley Drive",
+                            CustomerZipCode = "97501"
+                        },
+                        new
+                        {
+                            CustomerID = 18,
+                            CustomerCity = "Fremont",
+                            CustomerFirstName = "David",
+                            CustomerLastName = "Smith",
+                            CustomerPhoneNumber = "510-555-2646",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "311 20th Ave. N.E.",
+                            CustomerZipCode = "94538"
+                        },
+                        new
+                        {
+                            CustomerID = 19,
+                            CustomerCity = "Glendale",
+                            CustomerFirstName = "Zachary",
+                            CustomerLastName = "Ehrlich",
+                            CustomerPhoneNumber = "818-555-2721",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "12330 Kingman Drive",
+                            CustomerZipCode = "91209"
+                        },
+                        new
+                        {
+                            CustomerID = 20,
+                            CustomerCity = "Bellevue",
+                            CustomerFirstName = "Joyce",
+                            CustomerLastName = "Bonnicksen",
+                            CustomerPhoneNumber = "425-555-2726",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "2424 Thames Drive",
+                            CustomerZipCode = "98006"
+                        },
+                        new
+                        {
+                            CustomerID = 21,
+                            CustomerCity = "Dallas",
+                            CustomerFirstName = "Estella",
+                            CustomerLastName = "Pundt",
+                            CustomerPhoneNumber = "972-555-9938",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "2500 Rosales Lane",
+                            CustomerZipCode = "75260"
+                        },
+                        new
+                        {
+                            CustomerID = 22,
+                            CustomerCity = "Long Beach",
+                            CustomerFirstName = "Caleb",
+                            CustomerLastName = "Viescas",
+                            CustomerPhoneNumber = "562-555-0037",
+                            CustomerState = "CA",
+                            CustomerStreetAddress = "4501 Wetland Road",
+                            CustomerZipCode = "90809"
+                        },
+                        new
+                        {
+                            CustomerID = 23,
+                            CustomerCity = "Seattle",
+                            CustomerFirstName = "Julia",
+                            CustomerLastName = "Schnebly",
+                            CustomerPhoneNumber = "206-555-9936",
+                            CustomerState = "WA",
+                            CustomerStreetAddress = "2343 Harmony Lane",
+                            CustomerZipCode = "99837"
+                        },
+                        new
+                        {
+                            CustomerID = 24,
+                            CustomerCity = "El Paso",
+                            CustomerFirstName = "Mark",
+                            CustomerLastName = "Rosales",
+                            CustomerPhoneNumber = "915-555-2286",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "323 Advocate Lane",
+                            CustomerZipCode = "79915"
+                        },
+                        new
+                        {
+                            CustomerID = 25,
+                            CustomerCity = "El Paso",
+                            CustomerFirstName = "Maria",
+                            CustomerLastName = "Patterson",
+                            CustomerPhoneNumber = "915-555-2291",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "3445 Cheyenne Road",
+                            CustomerZipCode = "79915"
+                        },
+                        new
+                        {
+                            CustomerID = 26,
+                            CustomerCity = "San Antonio",
+                            CustomerFirstName = "Kirk",
+                            CustomerLastName = "DeGrasse",
+                            CustomerPhoneNumber = "210-555-2311",
+                            CustomerState = "TX",
+                            CustomerStreetAddress = "455 West Palm Ave",
+                            CustomerZipCode = "78284"
+                        },
+                        new
+                        {
+                            CustomerID = 27,
+                            CustomerCity = "Portland",
+                            CustomerFirstName = "Luke",
+                            CustomerLastName = "Patterson",
+                            CustomerPhoneNumber = "503-555-2316",
+                            CustomerState = "OR",
+                            CustomerStreetAddress = "877 145th Ave SE",
+                            CustomerZipCode = "97208"
                         });
                 });
 
             modelBuilder.Entity("MVCHOT2.Models.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("LongDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("ProductDescLong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<string>("ProductDescShort")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("ProductPrice")
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int?>("ProductQty")
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("ProductID");
 
-                    b.HasKey("ProductId");
-
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            ProductId = 1,
-                            CategoryId = "C",
-                            LongDescription = "",
-                            Name = "AeroFlo ATB Wheels",
-                            Price = 189.00m,
-                            Quantity = 40,
-                            ShortDescription = ""
+                            ProductID = 1,
+                            CategoryID = 1,
+                            ProductDescLong = "This is a fun flowy trail! The trail starts with a test- a skinny with a 2 ft. The area is mostly wooded but there are several places that offer spectacular views.",
+                            ProductDescShort = "ATB Wheels",
+                            ProductName = "AeroFlo ATB Wheels",
+                            ProductPrice = 189m,
+                            ProductQty = 40
                         },
                         new
                         {
-                            ProductId = 2,
-                            CategoryId = "A",
-                            LongDescription = "",
-                            Name = "Clear Shade 85-T Glasses",
-                            Price = 45.00m,
-                            Quantity = 14,
-                            ShortDescription = ""
+                            ProductID = 2,
+                            CategoryID = 2,
+                            ProductDescLong = "There is no preferred direction and the trail is a great connector for several other fun loops. Two wheel drifting is likely if you have speed.",
+                            ProductDescShort = "85-T Glasses",
+                            ProductName = "Clear Shade 85-T Glasses",
+                            ProductPrice = 45m,
+                            ProductQty = 14
                         },
                         new
                         {
-                            ProductId = 3,
-                            CategoryId = "C",
-                            LongDescription = "",
-                            Name = "Cosmic Elite Road Warrior Wheels",
-                            Price = 165.00m,
-                            Quantity = 22,
-                            ShortDescription = ""
+                            ProductID = 3,
+                            CategoryID = 3,
+                            ProductDescLong = "Rowdy little downhill/freeride track. 16 Mile Summer Trail was initially a rugged singletrack DH trail maintained by local builders since 2008.",
+                            ProductDescShort = "Road Warrior Wheels",
+                            ProductName = "Cosmic Elite Road Warrior Wheels",
+                            ProductPrice = 165m,
+                            ProductQty = 22
                         },
                         new
                         {
-                            ProductId = 4,
-                            CategoryId = "A",
-                            LongDescription = "",
-                            Name = "Cycle-Doc Pro Repair Stand",
-                            Price = 166.00m,
-                            Quantity = 12,
-                            ShortDescription = ""
+                            ProductID = 4,
+                            CategoryID = 4,
+                            ProductDescLong = "The State of Alaska installed a more user friendly course in 2012. Mostly dry with some small mud puddles. The trails are well drained and suitable for riding when wet.",
+                            ProductDescShort = "Repair Stand",
+                            ProductName = "Cycle-Doc Pro Repair Stand",
+                            ProductPrice = 166m,
+                            ProductQty = 12
                         },
                         new
                         {
-                            ProductId = 5,
-                            CategoryId = "A",
-                            LongDescription = "",
-                            Name = "Dog Ear Aero-Flow Floor Pump",
-                            Price = 55.00m,
-                            Quantity = 25,
-                            ShortDescription = ""
+                            ProductID = 5,
+                            CategoryID = 5,
+                            ProductDescLong = "It packs in a lot of excitement in a short amount of time. IMO it is a better ride to turn around and follow the same trail down. Removable by hand saw.",
+                            ProductDescShort = "Floor Pump",
+                            ProductName = "Dog Ear Aero-Flow Floor Pump",
+                            ProductPrice = 5m,
+                            ProductQty = 25
+                        },
+                        new
+                        {
+                            ProductID = 6,
+                            CategoryID = 6,
+                            ProductDescLong = "This is just a brute of a climb. Short and fast, with a few small jumps and some loose rocks to keep you on your toes.",
+                            ProductDescShort = "Cycle Computer",
+                            ProductName = "Dog Ear Cycle Computer",
+                            ProductPrice = 75m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 7,
+                            CategoryID = 1,
+                            ProductDescLong = "There may be an optional dropspot 1/2 way down. The turns may be smooth berms that will be easy riding. It has few real technical features.",
+                            ProductDescShort = "Helmet Mirrors",
+                            ProductName = "Dog Ear Helmet Mount Mirrors",
+                            ProductPrice = 7.45m,
+                            ProductQty = 12
+                        },
+                        new
+                        {
+                            ProductID = 8,
+                            CategoryID = 2,
+                            ProductDescLong = "Since being redesigned, it is a lot of fun to ride this glassy smooth and generally well-bermed trail. Logs embedded in the trail have been installed.",
+                            ProductDescShort = "Grip Gloves",
+                            ProductName = "Dog Ear Monster Grip Gloves",
+                            ProductPrice = 15m,
+                            ProductQty = 30
+                        },
+                        new
+                        {
+                            ProductID = 9,
+                            CategoryID = 3,
+                            ProductDescLong = "Installed to signal technical terrain. This trail begins with a small pump section with two smaller jumps and a third larger hip jump.",
+                            ProductDescShort = "Mountain Bike",
+                            ProductName = "Eagle FS-3 Mountain Bike",
+                            ProductPrice = 1800m,
+                            ProductQty = 8
+                        },
+                        new
+                        {
+                            ProductID = 10,
+                            CategoryID = 4,
+                            ProductDescLong = "Fun! Chewed up, lots of braking bumps, but still fun. Winding trail with dips, climbs and descents. The turns are all smooth berms and easy to ride.",
+                            ProductDescShort = "Clipless Pedals",
+                            ProductName = "Eagle SA-120 Clipless Pedals",
+                            ProductPrice = 139.95m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 11,
+                            CategoryID = 5,
+                            ProductDescLong = "Easy to ride and not wash out. This new trail flows well and has multiple banked berms and small jumps that wind down the mountainside.",
+                            ProductDescShort = "Cycling Helmet",
+                            ProductName = "Glide-O-Matic Cycling Helmet",
+                            ProductPrice = 125m,
+                            ProductQty = 24
+                        },
+                        new
+                        {
+                            ProductID = 12,
+                            CategoryID = 6,
+                            ProductDescLong = "MBoSC has partnered with land manager California Department of Forestry and Fire Protection (CAL FIRE) to build a four mile flow trail in Soquel Demonstration State Forest (SDSF).",
+                            ProductDescShort = "Mountain Bike",
+                            ProductName = "GT RTS-2 Mountain Bike",
+                            ProductPrice = 1650m,
+                            ProductQty = 5
+                        },
+                        new
+                        {
+                            ProductID = 13,
+                            CategoryID = 1,
+                            ProductDescLong = "Large group of trees down on northern section of trail, between buckhorn and club gap. There is no preferred direction and the trail is a great connector for several other fun loops.",
+                            ProductDescShort = "Panniers",
+                            ProductName = "HP Deluxe Panniers",
+                            ProductPrice = 39m,
+                            ProductQty = 10
+                        },
+                        new
+                        {
+                            ProductID = 14,
+                            CategoryID = 2,
+                            ProductDescLong = "This area has a high density of trails for all ability levels and serves as the unofficial hub of mountain bike activity in the South Shore.",
+                            ProductDescShort = "Helmet",
+                            ProductName = "King Cobra Helmet",
+                            ProductPrice = 139m,
+                            ProductQty = 30
+                        },
+                        new
+                        {
+                            ProductID = 15,
+                            CategoryID = 3,
+                            ProductDescLong = "Mountain bike activity in the South Shore. By the end of the 45-50 miles youll be plenty tired from the constant up and down nature of Mana Road.",
+                            ProductDescShort = "Kool Breeze Rocket Top Jersey",
+                            ProductName = "Kool Breeze Rocket Top Jersey",
+                            ProductPrice = 4.99m,
+                            ProductQty = 40
+                        },
+                        new
+                        {
+                            ProductID = 16,
+                            CategoryID = 4,
+                            ProductDescLong = "16 Mile Summer Trail was initially a rugged singletrack DH trail maintained by local builders since 2008, the State of Alaska installed a more user friendly course in 2012.",
+                            ProductDescShort = "2000 U-Lock",
+                            ProductName = "Kryptonite Advanced 2000 U-Lock",
+                            ProductPrice = 50m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 17,
+                            CategoryID = 5,
+                            ProductDescLong = "Third Divide makes up part of the classic Downieville downhill route. A little overgrown on the seward side, but totlaly manageable.",
+                            ProductDescShort = "U-Lock",
+                            ProductName = "Nikoma Lok-Tight U-Lock",
+                            ProductPrice = 33m,
+                            ProductQty = 12
+                        },
+                        new
+                        {
+                            ProductID = 18,
+                            CategoryID = 6,
+                            ProductDescLong = "Overgrown on the seward side, but totlaly manageable. Trail full of berms and fun features! But this trail does not relent for one second.",
+                            ProductDescShort = "ATB Pedal",
+                            ProductName = "ProFormance ATB All-Terrain Pedal",
+                            ProductPrice = 28m,
+                            ProductQty = 40
+                        },
+                        new
+                        {
+                            ProductID = 19,
+                            CategoryID = 1,
+                            ProductDescLong = "It doesnt get much use though so is sometimes a bit overgrown. Out here you will find the most legal features including log rides.",
+                            ProductDescShort = "Toe Klips",
+                            ProductName = "ProFormance Toe Klips 2G",
+                            ProductPrice = 28m,
+                            ProductQty = 40
+                        },
+                        new
+                        {
+                            ProductID = 20,
+                            CategoryID = 2,
+                            ProductDescLong = "Jumps and rock rolls in South Tahoe including the new jumps, berms, rollers and hips TAMBA and SBTS built in 2014. As the valley begins to close",
+                            ProductDescShort = "Dillo Shades",
+                            ProductName = "Pro-Sport Dillo Shades",
+                            ProductPrice = 82m,
+                            ProductQty = 18
+                        },
+                        new
+                        {
+                            ProductID = 21,
+                            CategoryID = 3,
+                            ProductDescLong = "The route transitions to a section of open forest. Trail contains a rope-suspended ladder bridge, elevated bridges and a long-straight skinny.",
+                            ProductDescShort = "Hitch Pack",
+                            ProductName = "Road Warrior Hitch Pack",
+                            ProductPrice = 175m,
+                            ProductQty = 6
+                        },
+                        new
+                        {
+                            ProductID = 22,
+                            CategoryID = 4,
+                            ProductDescLong = "Elevated bridges and a long-straight skinny. This new trail flows well and has multiple banked berms and small jumps that wind down the mountainside.",
+                            ProductDescShort = "SC Brakes",
+                            ProductName = "Shinoman 105 SC Brakes",
+                            ProductPrice = 23.50m,
+                            ProductQty = 16
+                        },
+                        new
+                        {
+                            ProductID = 23,
+                            CategoryID = 5,
+                            ProductDescLong = "The trail is somewhat wide for singletrack and a bit technical with roots and rocks. Several high speed, low risk sections take you down the sandy open trail.",
+                            ProductDescShort = "TX-30 Pedal",
+                            ProductName = "Shinoman Deluxe TX-30 Pedal",
+                            ProductPrice = 45m,
+                            ProductQty = 60
+                        },
+                        new
+                        {
+                            ProductID = 24,
+                            CategoryID = 6,
+                            ProductDescLong = "The sandy open trail for some of the most fun downhills in the area. Lost Lake starts at its namesake trailhead. Several high speed, low risk sections take you down the sandy open trail",
+                            ProductDescShort = "Headset",
+                            ProductName = "Shinoman Dura-Ace Headset",
+                            ProductPrice = 67.50m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 25,
+                            CategoryID = 1,
+                            ProductDescLong = "Take you down the sandy open trail for some of the most fun downhills in the area. Ridgeline is a crown jewel of Dupont State Recreational Forest.",
+                            ProductDescShort = "Pants",
+                            ProductName = "StaDry Cycling Pants",
+                            ProductPrice = 69m,
+                            ProductQty = 22
+                        },
+                        new
+                        {
+                            ProductID = 26,
+                            CategoryID = 2,
+                            ProductDescLong = "You now have to ride down an asphalt trail and cut off onto a gravel trail before getting back to the old single track. Watch that you dont overshoot the switchback",
+                            ProductDescShort = "Bike Rack",
+                            ProductName = "TransPort Bicycle Rack",
+                            ProductPrice = 27m,
+                            ProductQty = 14
+                        },
+                        new
+                        {
+                            ProductID = 27,
+                            CategoryID = 3,
+                            ProductDescLong = "Stay the black diamond descent - the blue route was completely overgrown. This was a legitimate expert trail, but much difficulty can be mitigated slowing down, picking your line carefully.",
+                            ProductDescShort = "Mountain Bike",
+                            ProductName = "Trek 9000 Mountain Bike",
+                            ProductPrice = 1200m,
+                            ProductQty = 6
+                        },
+                        new
+                        {
+                            ProductID = 28,
+                            CategoryID = 4,
+                            ProductDescLong = "The start of the dirt road is marked on the Google Map directions on this page. Im slow and a little chicken top hit some of the gap jumps but this was super fun.",
+                            ProductDescShort = "Gloves",
+                            ProductName = "True Grip Competition Gloves",
+                            ProductPrice = 22m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 29,
+                            CategoryID = 5,
+                            ProductDescLong = "Logs embedded in the trail have been installed to signal technical terrain. Out of the parking lot, take your first left. Trail contains a rope-suspended ladder bridge.",
+                            ProductDescShort = "Tires",
+                            ProductName = "Turbo Twin Tires",
+                            ProductPrice = 29m,
+                            ProductQty = 18
+                        },
+                        new
+                        {
+                            ProductID = 30,
+                            CategoryID = 6,
+                            ProductDescLong = "Elevated bridges and a long-straight skinny. Having gotten that out of the way, the Mana Road ride is absolutely beautiful and worth the ride.",
+                            ProductDescShort = "Car Rack",
+                            ProductName = "Ultimate Export 2G Car Rack",
+                            ProductPrice = 180m,
+                            ProductQty = 8
+                        },
+                        new
+                        {
+                            ProductID = 31,
+                            CategoryID = 1,
+                            ProductDescLong = "Road ride is absolutely beautiful and worth the ride. Watch that you dont overshoot the switchback to stay on the black diamond descent - the blue route is completely overgrown.",
+                            ProductDescShort = "Tires",
+                            ProductName = "Ultra-2K Competition Tire",
+                            ProductPrice = 34m,
+                            ProductQty = 22
+                        },
+                        new
+                        {
+                            ProductID = 32,
+                            CategoryID = 2,
+                            ProductDescLong = "Super loose after second intersection. The bottom portion of the trail is fast, loose and tight. Landings are getting a little rotted but the overall condition is good.",
+                            ProductDescShort = "Rain Jacket",
+                            ProductName = "Ultra-Pro Rain Jacket",
+                            ProductPrice = 85m,
+                            ProductQty = 30
+                        },
+                        new
+                        {
+                            ProductID = 33,
+                            CategoryID = 3,
+                            ProductDescLong = "The overall condition is good. The start of the dirt road is marked on the Google Map directions on this page. Pretty dry and fast.",
+                            ProductDescShort = "Tires",
+                            ProductName = "Victoria Pro All Weather Tires",
+                            ProductPrice = 54.95m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 34,
+                            CategoryID = 4,
+                            ProductDescLong = "At almost 20 miles with almost everything tahoe has to offer. I need to learn how to jump! By the end of the 45-50 miles youll be plenty tired from the constant up and down.",
+                            ProductDescShort = "Computer",
+                            ProductName = "Viscount C-500 Wireless Bike Computer",
+                            ProductPrice = 49m,
+                            ProductQty = 30
+                        },
+                        new
+                        {
+                            ProductID = 35,
+                            CategoryID = 5,
+                            ProductDescLong = "The constant up and down nature of Mana Road. There are actually three trails which make up the loop: Horse Creek-Cattle Creek-Lower Twin Lake. Logs are gone!",
+                            ProductDescShort = "Watch",
+                            ProductName = "Viscount CardioSport Sport Watch",
+                            ProductPrice = 179m,
+                            ProductQty = 12
+                        },
+                        new
+                        {
+                            ProductID = 36,
+                            CategoryID = 6,
+                            ProductDescLong = "Third Divide makes up part of the classic Downieville downhill route. There is no preferred direction and the trail is a great connector for several other fun loops.",
+                            ProductDescShort = "Helmet",
+                            ProductName = "Viscount Microshell Helmet",
+                            ProductPrice = 36m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 37,
+                            CategoryID = 1,
+                            ProductDescLong = "A trail & parking area reconstruction project completed in July 17. Long pedal up form town but best when shuttled to the top.",
+                            ProductDescShort = "Mountain Bike",
+                            ProductName = "Viscount Mountain Bike",
+                            ProductPrice = 635m,
+                            ProductQty = 5
+                        },
+                        new
+                        {
+                            ProductID = 38,
+                            CategoryID = 2,
+                            ProductDescLong = "One of the best downhills in the area. This ridge is more rugged than the other two ridges. The trail has good flow with some spicy sections.",
+                            ProductDescShort = "Transmitter",
+                            ProductName = "Viscount Tru-Beat Heart Transmitter",
+                            ProductPrice = 47m,
+                            ProductQty = 20
+                        },
+                        new
+                        {
+                            ProductID = 39,
+                            CategoryID = 3,
+                            ProductDescLong = "There are also several sections of slickrock that are fun to ride and allow you to pick your own line. The trails all run parallel to the Fountain Place paved road.",
+                            ProductDescShort = "Cycle Socks",
+                            ProductName = "Wonder Wool Cycle Socks",
+                            ProductPrice = 19m,
+                            ProductQty = 30
+                        },
+                        new
+                        {
+                            ProductID = 40,
+                            CategoryID = 4,
+                            ProductDescLong = "Built specifically for mountain bikes, a flow trail emphasizes speed and rhythm, featuring berms, rollers, jumps and other features.",
+                            ProductDescShort = "Tires",
+                            ProductName = "X-Pro All Weather Tires",
+                            ProductPrice = 24m,
+                            ProductQty = 20
                         });
                 });
 
@@ -143,7 +855,7 @@ namespace MVCHOT2.Migrations
                 {
                     b.HasOne("MVCHOT2.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
