@@ -69,11 +69,24 @@
             
             </div>
         </nav>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @if (TempData.Keys.Contains("message"))
+                {
+                    <h2 class="bg-info text-white text-center p-2 mt-2 rounded">@TempData["message"]</h2>
+                }
+            </main>
+        </div>
         @RenderBody()
-        <div class="container text-center">
-            <footer class="footer fixed-bottom bg-dark text-light">
+        <div class="text-center mt-3 pb-3">
+            <footer class="footer fixed-bottom bg-dark text-light border-top">
                 © Sports Pro 2023
             </footer>
+
+            <script src="~/lib//jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            @RenderSection("scripts", false)
         </div>
     </div>
 </body>

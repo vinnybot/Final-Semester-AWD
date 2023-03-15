@@ -31,7 +31,10 @@ namespace Chapter_3.Models
         public Technician Technician { get; set; } = null!;
 
         [Required(ErrorMessage = "Please select a date opened.")]
-        public DateTime? DateOpened { get; set; } = null;
+        public DateTime DateOpened { get; set; } = DateTime.Now;
+
+        public DateTime? DateClosed { get; set; } = null!;
+
 
 
     }

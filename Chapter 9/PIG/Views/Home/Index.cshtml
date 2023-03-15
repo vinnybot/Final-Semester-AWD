@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center bg-black p-5 text-white">
+    <div class="text-white">
+        <h1>Let's Play PIG!</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <ul class="list-group col-9 mt-4">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-10">
+                        @Model.Player1.Name @Model.Player1.Score
+                    </div>
+                    <div class="col-2">
+                        <form asp-action="NewGame" method="post">
+                        <input type="submit" value="New Game" class="btn btn-dark text-light" />
+                    </form>
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+                    @Model.Player2.Name @Model.Player2.Score
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="fw-bold d-flex row">
+                    <div class="col-12">
+                        @Model.CurrentPlayerName's Turn
+                    </div>
+
+                <div class="col-3">
+                    <form asp-action="Roll" method="post">
+                    <input type="submit" value="Roll" class="btn btn-dark text-white mt-3"
+                    @(Model.IsGameOver ? "disabled": "")/>
+                    </form>
+                </div>
+                <div class="col-3">
+                    <form asp-action="Hold" method="post">
+                        <input type="submit" value="Hold" class="btn btn-dark text-white mt-3"
+                        @(Model.IsGameOver ? "disabled": "") />
+                    </form>
+                </div>
+
+                <div class="col-3 mt-3">
+                    Die: @Model.LastRoll
+                </div>
+
+                <div class="col-3 mt-3">
+                    Total: @Model.CurrentTurnScore
+                </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-group col-2 mt-4">
+            <li class="list-group-item">
+                <h5 class="">First player to 20 wins.</h5>
+            </li>
+            <li class="list-group-item">
+                <h5>Players take turns rolling the die.</h5>
+            </li>
+            <li class="list-group-item">
+                <h5>Turn ends when player rolls a 1 or chooses to hold.</h5>
+            </li>
+            <li class="list-group-item">
+               <h5>If a player rolls a 1, they lose all points earned during that turn.</h5> 
+            </li>
+            <li class="list-group-item">
+                <h5>If player holds, points earned during that turn are added to their total.</h5>
+            </li>
+        </ul>
+    </div>
+</div>

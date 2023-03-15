@@ -127,20 +127,27 @@ namespace Chapter3.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IncidentId"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateOpened")
+                    b.Property<DateTime?>("DateClosed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOpened")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("TechnicianId")
+                    b.Property<int?>("TechnicianId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -162,7 +169,7 @@ namespace Chapter3.Migrations
                         {
                             IncidentId = 1,
                             CustomerId = 1,
-                            DateOpened = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8867),
+                            DateOpened = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(9089),
                             Description = "This software is literal cheeks bro.",
                             ProductId = 1,
                             TechnicianId = 1,
@@ -204,7 +211,7 @@ namespace Chapter3.Migrations
                             Code = "TRNY10",
                             Name = "Tournament Master 1.0",
                             Price = 4.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8747)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8767)
                         },
                         new
                         {
@@ -212,7 +219,7 @@ namespace Chapter3.Migrations
                             Code = "LEAG10",
                             Name = "League Scheduler 1.0",
                             Price = 4.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8750)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8775)
                         },
                         new
                         {
@@ -220,7 +227,7 @@ namespace Chapter3.Migrations
                             Code = "LEAGD10",
                             Name = "League Scheduler Deluxe 1.0",
                             Price = 7.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8752)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8786)
                         },
                         new
                         {
@@ -228,7 +235,7 @@ namespace Chapter3.Migrations
                             Code = "DRAFT10",
                             Name = "Draft Manager 1.0",
                             Price = 4.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8755)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8793)
                         },
                         new
                         {
@@ -236,7 +243,7 @@ namespace Chapter3.Migrations
                             Code = "TEAM10",
                             Name = "Team Manager 1.0",
                             Price = 4.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8757)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8799)
                         },
                         new
                         {
@@ -244,7 +251,7 @@ namespace Chapter3.Migrations
                             Code = "TRNY20",
                             Name = "Tournament Master 2.0",
                             Price = 5.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8759)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8805)
                         },
                         new
                         {
@@ -252,7 +259,7 @@ namespace Chapter3.Migrations
                             Code = "DRAFT20",
                             Name = "Draft Manager 2.0",
                             Price = 5.99m,
-                            ReleaseDate = new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8761)
+                            ReleaseDate = new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8812)
                         });
                 });
 
@@ -331,7 +338,7 @@ namespace Chapter3.Migrations
 
             modelBuilder.Entity("Chapter_3.Models.Incident", b =>
                 {
-                    b.HasOne("Chapter_3.Models.Customer", "CustomerName")
+                    b.HasOne("Chapter_3.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -349,7 +356,7 @@ namespace Chapter3.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CustomerName");
+                    b.Navigation("Customer");
 
                     b.Navigation("Product");
 

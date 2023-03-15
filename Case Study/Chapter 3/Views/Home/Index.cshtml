@@ -20,11 +20,11 @@
     </h1>
     <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Manage Products</li>
-            <li class="list-group-item">Manage Technicians</li>
-            <li class="list-group-item">Manage Customers</li>
-            <li class="list-group-item">Manage Incidents</li>
-            <li class="list-group-item">Manage Registrations</li>
+            <a class="list-group-item" asp-controller="Product" asp-action="List">Manage Products</a>
+            <a class="list-group-item" asp-controller="Technician" asp-action="List">Manage Technicians</a>
+            <a class="list-group-item" asp-controller="Customer" asp-action="List">Manage Customers</a>
+            <a class="list-group-item" asp-controller="Incident" asp-action="List">Manage Incidents</a>
+            <a class="list-group-item" asp-controller="Registration" asp-action="List">Manage Registrations</a>
         </ul>
     </div>
 </div>
@@ -33,7 +33,7 @@
     <h1>Technicians</h1>
     <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Update incidents</li>
+            <a class="list-group-item" asp-controller="TechIncident" asp-action="Index">Update incidents</a>
         </ul>
     </div>
 </div>

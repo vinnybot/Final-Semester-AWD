@@ -9,6 +9,7 @@ namespace Chapter_3.Controllers
         private SportsProContext context { get; set; }
 
         public TechnicianController(SportsProContext ctx) => context = ctx;
+        [Route("/technicians")]
         public IActionResult List()
         {
             var technicians = context.Technicians.OrderBy(t => t.Name).ToList();

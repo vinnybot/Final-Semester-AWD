@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Chapter_3.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Chapter_3.Controllers
 {
@@ -10,6 +11,7 @@ namespace Chapter_3.Controllers
 
         public ProductController(SportsProContext ctx) => context = ctx;
 
+        [Route("/products")]
         public IActionResult List()
         {
             var products = context.Products.OrderBy(p => p.ReleaseDate).ToList();
@@ -46,6 +48,8 @@ namespace Chapter_3.Controllers
                     //updating an existing product
                     context.Products.Update(modifiedProduct);
                 }
+
+                TempData["message"] = $"{modifiedProduct.Name} product was added.";
                 context.SaveChanges();
                 return RedirectToAction("List", "Product");
             }

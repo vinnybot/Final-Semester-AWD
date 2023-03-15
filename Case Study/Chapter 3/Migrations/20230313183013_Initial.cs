@@ -90,10 +90,11 @@ namespace Chapter3.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    TechnicianId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateOpened = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TechnicianId = table.Column<int>(type: "int", nullable: false),
+                    DateOpened = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateClosed = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,13 +135,13 @@ namespace Chapter3.Migrations
                 columns: new[] { "ProductId", "Code", "Name", "Price", "ReleaseDate" },
                 values: new object[,]
                 {
-                    { 1, "TRNY10", "Tournament Master 1.0", 4.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8747) },
-                    { 2, "LEAG10", "League Scheduler 1.0", 4.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8750) },
-                    { 3, "LEAGD10", "League Scheduler Deluxe 1.0", 7.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8752) },
-                    { 4, "DRAFT10", "Draft Manager 1.0", 4.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8755) },
-                    { 5, "TEAM10", "Team Manager 1.0", 4.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8757) },
-                    { 6, "TRNY20", "Tournament Master 2.0", 5.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8759) },
-                    { 7, "DRAFT20", "Draft Manager 2.0", 5.99m, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8761) }
+                    { 1, "TRNY10", "Tournament Master 1.0", 4.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8767) },
+                    { 2, "LEAG10", "League Scheduler 1.0", 4.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8775) },
+                    { 3, "LEAGD10", "League Scheduler Deluxe 1.0", 7.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8786) },
+                    { 4, "DRAFT10", "Draft Manager 1.0", 4.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8793) },
+                    { 5, "TEAM10", "Team Manager 1.0", 4.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8799) },
+                    { 6, "TRNY20", "Tournament Master 2.0", 5.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8805) },
+                    { 7, "DRAFT20", "Draft Manager 2.0", 5.99m, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(8812) }
                 });
 
             migrationBuilder.InsertData(
@@ -162,8 +163,8 @@ namespace Chapter3.Migrations
 
             migrationBuilder.InsertData(
                 table: "Incidents",
-                columns: new[] { "IncidentId", "CustomerId", "DateOpened", "Description", "ProductId", "TechnicianId", "Title" },
-                values: new object[] { 1, 1, new DateTime(2023, 2, 2, 15, 0, 58, 799, DateTimeKind.Local).AddTicks(8867), "This software is literal cheeks bro.", 1, 1, "Could not install" });
+                columns: new[] { "IncidentId", "CustomerId", "DateClosed", "DateOpened", "Description", "ProductId", "TechnicianId", "Title" },
+                values: new object[] { 1, 1, null, new DateTime(2023, 3, 13, 13, 30, 12, 791, DateTimeKind.Local).AddTicks(9089), "This software is literal cheeks bro.", 1, 1, "Could not install" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_CountryId",

@@ -8,6 +8,7 @@ namespace Chapter_3.Controllers
         private SportsProContext context { get; set; }
 
         public IncidentController(SportsProContext ctx) => context = ctx;
+        [Route("/incidents")]
         public IActionResult List()
         {
             var incidents = context.Incidents.Include(p => p.Product).Include(c => c.Customer).ToList();

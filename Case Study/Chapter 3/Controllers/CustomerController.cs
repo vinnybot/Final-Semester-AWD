@@ -9,7 +9,7 @@ namespace Chapter_3.Controllers
         
         public CustomerController(SportsProContext ctx) => context = ctx;
 
-
+        [Route("/customers")]
         public IActionResult List()
         {
             var customers = context.Customer.OrderBy(t => t.Name).ToList();
