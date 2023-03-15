@@ -10,9 +10,10 @@ namespace MVCHOT2.Controllers
 
         public ProductController(SalesOrderContext ctx) => context = ctx;
 
+        [Route("[controller]s")]
         public IActionResult List()
         {
-            var products = context.Products.Include(c => c.Category).OrderBy(x => x.Name).ToList();
+            var products = context.Products.Include(c => c.Category).OrderBy(x => x.ProductName).ToList();
             return View(products);
         }
 
@@ -30,7 +31,7 @@ namespace MVCHOT2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (modifiedProduct.ProductId == 0)
+                if (modifiedProduct.ProductID == 0)
                 //adding a new product
                 {
                     context.Products.Add(modifiedProduct);
@@ -46,7 +47,7 @@ namespace MVCHOT2.Controllers
             else
             {
                 //invalid data - didnt pass through validation
-                ViewBag.Action = (modifiedProduct.ProductId == 0) ? "Add" : "Edit";
+                ViewBag.Action = (modifiedProduct.ProductID == 0) ? "Add" : "Edit";
                 ViewBag.Categories = context.Categories.OrderBy(c => c.Name).ToList();
                 return View(modifiedProduct);
             }
@@ -56,7 +57,7 @@ namespace MVCHOT2.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            ViewBag.Product = context.Products.OrderBy(p => p.Name).ToList();
+            ViewBag.Product = context.Products.OrderBy(p => p.ProductName).ToList();
             ViewBag.Categories = context.Categories.OrderBy(c => c.Name).ToList();
             return View("Edit", new Product());
         }
@@ -74,6 +75,21 @@ namespace MVCHOT2.Controllers
             context.Products.Remove(product);
             context.SaveChanges();
             return RedirectToAction("List", "Product");
+        }
+
+        [Route("[controller]s/{id?}")]
+        public IActionResult Details(int id)
+        {
+            var categories = context.Categories.OrderBy(c => c.CategoryID).ToList();
+
+            Product product = context.Products.Find(id) ?? new Product();
+
+            string imageFilename = product.ProductImage + ".jpg";
+
+            ViewBag.Categories = categories;
+            ViewBag.ImageFilename = imageFilename;
+
+            return View(product);
         }
     }
 }

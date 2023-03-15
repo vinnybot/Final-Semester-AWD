@@ -6,32 +6,32 @@ namespace MVCHOT2.Models
 {
     public class Product
     {
-        public int ProductId { get; set; }
+        public int ProductID { get; set; }
         [Required(ErrorMessage = "Please enter a product name")]
-        public string Name { get; set; } = string.Empty;
+        public string ProductName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please enter a short description for this product.")]
-        public string ShortDescription { get; set; } = string.Empty;
+        public string ProductDescShort { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please enter a long description for this product.")]
 
-        public string LongDescription { get; set; } = string.Empty;
+        public string ProductDescLong { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please provide an image for this product.")]
-        public string Image = string.Empty;
+        public string ProductImage = string.Empty;
 
         [Required(ErrorMessage = "Please enter a price between 1 - 100000")]
-        public decimal? Price { get; set; }
+        public decimal? ProductPrice { get; set; }
 
         [Required(ErrorMessage = "Please enter a quantity between 1- 1000")]
-        public int? Quantity { get; set; }
+        public int? ProductQty { get; set; }
 
         [Required(ErrorMessage = "Please enter a category")]
-        public string CategoryId { get; set; } = string.Empty;
+        public int CategoryID { get; set; }
 
         [ValidateNever]
         public Category Category { get; set; } = null!;
 
-        public string Slug => Name?.Replace(' ', '-').ToLower() + '-' + Price?.ToString();
+        public string Slug => ProductName?.Replace(' ', '-').ToLower() + '-' + ProductPrice?.ToString();
     }
 }
