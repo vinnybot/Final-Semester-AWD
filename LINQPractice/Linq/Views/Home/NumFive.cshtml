@@ -1,0 +1,21 @@
+﻿@model List<Branch>
+
+    <h1>Branches with more than 9 employees</h1>
+
+    <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Branch Names</th>
+            <th>Branch Employees</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var branch in Model)
+        {
+                    <tr>
+                        <td>@branch.BranchName</td>
+                        <td>@branch.NumEmployees</td>
+                    </tr>
+        }
+    </tbody>
+</table>

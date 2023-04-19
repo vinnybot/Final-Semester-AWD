@@ -1,4 +1,4 @@
-using Chapter_3.Models;
+using Chapter_3.Models.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

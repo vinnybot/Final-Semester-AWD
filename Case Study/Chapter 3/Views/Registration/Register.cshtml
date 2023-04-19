@@ -1,0 +1,50 @@
+﻿@model RegistrationViewModel
+@{
+    ViewBag.Title = "Registrations";
+}
+
+<h1 class="mb-3 ms-3">Customer: @Model.Customer.Name<br /> Registrations</h1>
+
+@if(Model.Customer.Products.Count > 0)
+{
+    <table class="table table-bordered table-striped mx-3">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product p in Model.Customer.Products)
+            {
+                <tr>
+                    <td>@p.Name</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" name="CustomerId" value="@Model.Customer.CustomerId" />
+                            <input type="hidden" name="ProductId" value="@p.ProductId" />
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p class="mx-3">This Customer has no products.</p>
+}
+
+    <h1 class="mx-3">Product</h1>
+    <form asp-action="Add" method="post">
+        <input type="hidden" asp-for="Customer.CustomerId" name="custId" />
+        <div class="mb-3 mx-3">
+            <select asp-for="Product.ProductId" class="form-select" name="id"
+            asp-items="@(new SelectList(Model.Products, "ProductId", "Name"))">
+            <option value="0">Select a Product . . .</option>
+        </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary mx-3">Register</button>
+        </div>
+    </form>

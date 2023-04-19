@@ -1,0 +1,21 @@
+﻿@model List<PublisherNameDTO>
+
+    <h1>Publishers Not Located In Boston</h1>
+
+    <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Publisher Name</th>
+            <th>Publisher City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var publisher in Model)
+        {
+                    <tr>
+                        <td>@publisher.PublisherName</td>
+                        <td>@publisher.City</td>
+                    </tr>
+        }
+    </tbody>
+</table>

@@ -10,6 +10,8 @@ namespace Chapter_8.Controllers
 
         public TripController(TripContext ctx) => context = ctx;
 
+        [HttpGet]
+
         public ViewResult Add(string id = "")
         {
             var vm = new TripViewModel();

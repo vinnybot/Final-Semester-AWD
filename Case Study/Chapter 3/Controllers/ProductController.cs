@@ -1,20 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Chapter_3.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Chapter_3.Models.DomainModels;
+using Chapter_3.Models.DataAccess;
 
 namespace Chapter_3.Controllers
 {
     public class ProductController : Controller
     {
-        private SportsProContext context { get; set; }
+        private Repository<Product> ProductData { get; set; }
 
-        public ProductController(SportsProContext ctx) => context = ctx;
+        public ProductController(SportsProContext ctx)
+        {
+            ProductData = new Repository<Product>(ctx);
+        }
 
         [Route("/products")]
         public IActionResult List()
         {
-            var products = context.Products.OrderBy(p => p.ReleaseDate).ToList();
+            var options = new QueryOptions<Product>()
+            {
+                OrderBy = p => p.Price
+            };
+
+            var products = ProductData.List(options);
+            //var products = context.Products.OrderBy(p => p.ReleaseDate).ToList();
             return View(products);
         }
 
@@ -29,7 +39,7 @@ namespace Chapter_3.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            var product = context.Products.Find(id);
+            var product = ProductData.Get(id);
             return View(product);
         }
 
@@ -41,16 +51,16 @@ namespace Chapter_3.Controllers
                 if (modifiedProduct.ProductId == 0)
                 //adding a new product
                 {
-                    context.Products.Add(modifiedProduct);
+                    ProductData.Insert(modifiedProduct);    
                 }
                 else
                 {
                     //updating an existing product
-                    context.Products.Update(modifiedProduct);
+                    ProductData.Update(modifiedProduct);
                 }
 
                 TempData["message"] = $"{modifiedProduct.Name} product was added.";
-                context.SaveChanges();
+                ProductData.Save();
                 return RedirectToAction("List", "Product");
             }
             else
@@ -63,16 +73,22 @@ namespace Chapter_3.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var product = context.Products.Find(id);
-            return View(product);
+            var product = ProductData.Get(id);
+                return View(product);
         }
 
         [HttpPost]
         public IActionResult Delete(Product product)
         {
-            context.Products.Remove(product);
-            context.SaveChanges();
+            TempData["message"] = $"{product.Name} Deleted!";
+            ProductData.Delete(product);
+            ProductData.Save();
             return RedirectToAction("List", "Product");
         }
     }
 }
+
+
+            // Monday - Encapsulate the data layer for the remaining controllers. (Technicians and Registrations)
+            //If there is time, finish fixing the bug with customers where they are able to edit there email to an already existing email by bypassing the
+            //email check

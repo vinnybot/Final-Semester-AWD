@@ -4,3 +4,7 @@
 #aboutText {
     color: rgba(255, 255, 255, .55); 
 }
+.input-validation-error {
+    border: 2px solid #dc3545; /* same red as text-danger */
+    background-color: #faebd7; /* antique white */
+}

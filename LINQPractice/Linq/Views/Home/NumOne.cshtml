@@ -1,0 +1,21 @@
+﻿@model List<BookDTO>
+
+    <h1>List of Books</h1>
+
+    <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book Code</th>
+            <th>Book Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+                <tr>
+                    <td>@book.BookCode</td>
+                    <td>@book.Title</td>
+                </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+﻿@model SalesListViewModel
+
+@{
+    ViewData["Title"] = "Quarterly Sales";
+}
+
+
+<div class=" mx-5 mt-5">
+    <h2>Quarterly Sales</h2>
+</div>
+
+<form class="flex row">
+    <div class="mx-5 col-2">Employee</div>
+        <div class="col-2">
+            <select name="EmployeeId" class="form-select"
+            asp-items="@(new SelectList(Model.Employees, "EmployeeId", "Name", Model.EmployeeId))">
+                <option value="0">All</option>
+            </select>
+        </div>
+            <div class="col-4">
+            <button class="btn btn-primary">Filter</button>
+            </div>
+        </form>
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Quarter</th>
+                    <th>Employee</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (Sale sales in Model.Sales)
+            {
+                    <tr>
+                        <td>@sales.Year</td>
+                        <td>@sales.Quarter</td>
+                        <td>@sales.Employee.FullName</td>
+                        <td>@sales.Amount?.ToString("c")</td>
+                    </tr>
+            }
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">Total Sales</td>
+                <td>@Model.Sales.Sum(m => m.Amount)?.ToString("C")</td>
+            </tr>
+            </tfoot>
+</table>

@@ -1,18 +1,29 @@
-﻿using Chapter_3.Models;
+﻿using Chapter_3.Models.DataAccess;
+using Chapter_3.Models.DomainModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chapter_3.Controllers
 {
     public class CustomerController : Controller
     {
-        private SportsProContext context { get; set; }
-        
-        public CustomerController(SportsProContext ctx) => context = ctx;
+        private Repository<Customer> CustomerData { get; set; }
+        private Repository<Country> CountryData { get; set; }
+
+        public CustomerController(SportsProContext ctx)
+        {
+            CustomerData = new Repository<Customer>(ctx);
+            CountryData = new Repository<Country>(ctx);
+        }
 
         [Route("/customers")]
         public IActionResult List()
         {
-            var customers = context.Customer.OrderBy(t => t.Name).ToList();
+            var options = new QueryOptions<Customer>()
+            {
+                OrderBy = c => c.Name
+            };
+
+            var customers = CustomerData.List(options);
             return View(customers);
         }
 
@@ -20,31 +31,50 @@ namespace Chapter_3.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
-            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
-            var customer = context.Customer.Find(id);
+            ViewBag.Countries = CountryData.List(new QueryOptions<Country>
+            {
+                OrderBy = c => c.Name
+            });
+            var customer = CustomerData.Get(id);
             return View(customer);
         }
 
         [HttpPost]
         public IActionResult Edit(Customer modifiedCustomer)
         {
+            //server side check for remote validation
+            if (modifiedCustomer.CustomerId == 0)
+            {
+                string msg = Check.EmailExists(CustomerData, modifiedCustomer);
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    ModelState.AddModelError(nameof(Customer.Email), msg);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (modifiedCustomer.CustomerId == 0)
                 {
-                    context.Customer.Add(modifiedCustomer);
+                    //add a new customer
+                    CustomerData.Insert(modifiedCustomer);
                 }
                 else
                 {
-                    context.Customer.Update(modifiedCustomer);
+                    //update an existing customer
+                    CustomerData.Update(modifiedCustomer);
                 }
-                context.SaveChanges();
+
+                CustomerData.Save();
                 return RedirectToAction("List", "Customer");
             }
             else
             {
                 ViewBag.Action = (modifiedCustomer.CustomerId == 0) ? "Add" : "Edit";
-                ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
+                ViewBag.Countries = CountryData.List(new QueryOptions<Country>
+                {
+                    OrderBy = c => c.Name
+                }); 
                 return View(modifiedCustomer);
             }
         }
@@ -52,22 +82,26 @@ namespace Chapter_3.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
+            ViewBag.Countries = CountryData.List(new QueryOptions<Country>
+            {
+                OrderBy = c => c.Name
+            });
+
             return View("Edit", new Customer());
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var customer = context.Customer.Find(id);
+            var customer = CustomerData.Get(id);
             return View(customer);
         }
 
         [HttpPost]
         public IActionResult Delete(Customer customer)
         {
-            context.Customer.Remove(customer);
-            context.SaveChanges();
+            CustomerData.Delete(customer);
+            CustomerData.Save();
             return RedirectToAction("List", "Customer");
         }
     }

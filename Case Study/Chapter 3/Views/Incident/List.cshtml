@@ -1,8 +1,12 @@
-﻿@model List<Incident>
+﻿@model IEnumerable<Incident>
 
 @{
     ViewData["Title"] = "Incident Manager - Sports Pro";
     Layout = "_Layout";
+    string controller =
+        ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string action =
+        ViewContext.RouteData.Values["action"]?.ToString() ?? "";
 }
 
 <header class="mx-3 mt-3">
@@ -13,7 +17,19 @@
     </div>
 </header>
 
-<table class="table table-bordered mx-3">
+<nav class="nav nav-pills mt-3 mx-3">
+            <a class="nav-item nav-link @(controller == "Incident" && action == "List" ? "active" : "")" asp-controller="Incident" asp-action="List">
+                All incidents
+            </a>
+            <a class="nav-item nav-link @(controller == "Incident" && action == "unassignedFilter" ? "active" : "")" asp-controller="Incident" asp-action="unassignedFilter">
+                Unassigned incidents
+            </a>
+            <a class="nav-item nav-link @(controller == "Incident" && action == "openFilter" ? "active" : "")" asp-controller="Incident" asp-action="openFilter">
+                Open incidents
+            </a>
+        </nav>
+
+<table class="table table-bordered mx-3 mt-3">
     <thead>
         <tr>
             <th>Title</th>

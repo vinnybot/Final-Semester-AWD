@@ -1,4 +1,6 @@
-﻿using Chapter_3.Models;
+﻿using Chapter_3.Models.DataAccess;
+using Chapter_3.Models.DomainModels;
+using Chapter_3.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,8 +66,7 @@ namespace Chapter_3.Controllers
                     .Include(i => i.Customer)
                     .Include(i => i.Product)
                     .OrderBy(i => i.DateOpened)
-                    .Where(i => i.TechnicianId == id)
-                    .Where(i => i.DateClosed == null)
+                    .Where(i => i.TechnicianId == id && i.DateClosed == null)
                     .ToList()
                 };
                 return View(model);

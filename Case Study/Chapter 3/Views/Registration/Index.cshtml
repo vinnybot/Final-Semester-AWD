@@ -1,0 +1,24 @@
+﻿@model RegistrationViewModel
+
+@{
+    ViewBag.Title = "Manage Registration";
+}
+
+<h1 class="mx-3">Get Customer</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Register" method="post">
+
+    <div class="mb-3 mx-3">
+        <label asp-for="Customer.CustomerId" class="form-label">Customer</label>
+        <select asp-for="Customer.CustomerId" class="form-select"
+                asp-items="@(new SelectList(Model.Customers, "CustomerId", "Name"))">
+            <option value="0">Select a Customer ...</option>
+        </select>
+    </div>
+
+    <div class="mx-3">
+        <button type="submit" class="btn btn-primary">Select</button>
+    </div>
+</form>

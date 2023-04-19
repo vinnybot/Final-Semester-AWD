@@ -1,0 +1,25 @@
+﻿@model List<Publisher>
+
+@{
+    ViewData["Title"] = "All Publishers";
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Publisher Code</th>
+            <th>Publisher Name</th>
+            <th>Publisher City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var publisher in Model)
+        {
+            <tr>
+                <td>@publisher.PublisherCode</td>
+                <td>@publisher.PublisherName</td>
+                <td>@publisher.City</td>
+            </tr>
+        }
+    </tbody>
+</table>

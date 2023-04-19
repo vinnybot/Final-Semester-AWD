@@ -1,4 +1,5 @@
-﻿using Chapter_3.Models;
+﻿using Chapter_3.Models.DataAccess;
+using Chapter_3.Models.DomainModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,13 +7,25 @@ namespace Chapter_3.Controllers
 {
     public class TechnicianController : Controller
     {
-        private SportsProContext context { get; set; }
+        //private SportsProContext context { get; set; }
 
-        public TechnicianController(SportsProContext ctx) => context = ctx;
+        private Repository<Technician> TechnicianData { get; set; }
+
+        public TechnicianController(SportsProContext ctx)
+        {
+            TechnicianData = new Repository<Technician>(ctx);
+        }
+
         [Route("/technicians")]
         public IActionResult List()
         {
-            var technicians = context.Technicians.OrderBy(t => t.Name).ToList();
+            var options = new QueryOptions<Technician>()
+            {
+                OrderBy = t => t.Name
+            };
+
+            var technicians = TechnicianData.List(options);
+
             return View(technicians);
         }
 
@@ -26,7 +39,7 @@ namespace Chapter_3.Controllers
         [HttpGet]
         public IActionResult Edit(int id) {
             ViewBag.Action = "Edit";
-            var technicians = context.Technicians.Find(id);
+            var technicians = TechnicianData.Get(id);
             return View(technicians);
         }
 
@@ -36,13 +49,15 @@ namespace Chapter_3.Controllers
             {
                 if (modifiedTechnician.TechnicianId == 0)
                 {
-                    context.Technicians.Add(modifiedTechnician);
+                    //add a new technician
+                    TechnicianData.Insert(modifiedTechnician);
                 }
                 else
                 {
-                    context.Technicians.Update(modifiedTechnician);
+                    //update an existing technician
+                    TechnicianData.Update(modifiedTechnician);
                 }
-                context.SaveChanges();
+                TechnicianData.Save();
                 return RedirectToAction("List", "Technician");
             }
             else
@@ -55,15 +70,15 @@ namespace Chapter_3.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var technician = context.Technicians.Find(id);
+            var technician = TechnicianData.Get(id);
             return View(technician);
         }
 
         [HttpPost]
         public IActionResult Delete(Technician technician)
         {
-            context.Technicians.Remove(technician);
-            context.SaveChanges();
+            TechnicianData.Delete(technician);
+            TechnicianData.Save();
             return RedirectToAction("List", "Technician");
         }
     }

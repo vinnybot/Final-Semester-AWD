@@ -15,6 +15,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/StyleSheet.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <script defer src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
@@ -57,7 +58,9 @@
                             asp-controller="Incident" asp-action="List">Incidents</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Registrations" asp-action="List">Registrations</a>
+                            <a class="nav-link
+                            @(controller == "Registration" ? "active" : "")"
+                            asp-controller="Registration" asp-action="Index">Registrations</a>
                         </li>
                      
                     </ul>
