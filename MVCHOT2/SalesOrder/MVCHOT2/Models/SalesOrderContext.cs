@@ -21,7 +21,7 @@ namespace MVCHOT2.Models
                     ProductName = "AeroFlo ATB Wheels",
                     ProductDescShort = "ATB Wheels",
                     ProductDescLong = "This is a fun flowy trail! The trail starts with a test- a skinny with a 2 ft. The area is mostly wooded but there are several places that offer spectacular views.",
-                    ProductImage = "01-AeroFlo-ATB-Wheels.jpg",
+                    ProductImage = "/01-AeroFlo-ATB-Wheels.jpg",
                     ProductPrice = 189M,
                     ProductQty = 40,
                     CategoryID = 1
@@ -32,7 +32,7 @@ namespace MVCHOT2.Models
                     ProductName = "Clear Shade 85-T Glasses",
                     ProductDescShort = "85-T Glasses",
                     ProductDescLong = "There is no preferred direction and the trail is a great connector for several other fun loops. Two wheel drifting is likely if you have speed.",
-                    ProductImage = "~/images/02-Clear-Shade-85-T-Glasses.jpg",
+                    ProductImage = "/02-Clear-Shade-85-T-Glasses.jpg",
                     ProductPrice = 45M,
                     ProductQty = 14,
                     CategoryID = 2
