@@ -39,7 +39,7 @@
     <form asp-action="Add" method="post">
         <input type="hidden" asp-for="Customer.CustomerId" name="custId" />
         <div class="mb-3 mx-3">
-            <select asp-for="Product.ProductId" class="form-select" name="id"
+            <select asp-for="Product.ProductId" class="form-select" name="ProductId"
             asp-items="@(new SelectList(Model.Products, "ProductId", "Name"))">
             <option value="0">Select a Product . . .</option>
         </select>

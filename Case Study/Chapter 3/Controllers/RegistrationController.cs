@@ -62,31 +62,32 @@ namespace Chapter_3.Controllers
             {
                 OrderBy = p => p.Name
             });
+
             return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Add(int customerId, int productId)
+        public IActionResult Add(int custId, int ProductId)
         {
             var vm = new RegistrationViewModel();
             var customer = CustomerData.Get(new QueryOptions<Customer>
             {
                 Includes = "Products",
-                Where = c => c.CustomerId == customerId
+                Where = c => c.CustomerId == custId
             });
-            var product = ProductData.Get(productId);
+            var product = ProductData.Get(ProductId);
 
-            if (productId == 0)
+            if (ProductId == 0)
             {
                 TempData["message"] = "Please select a product.";
-                return RedirectToAction("Register", new { id = customerId });
+                return RedirectToAction("Register", new { id = custId });
             }
             else
             {
-                if (customer.Products.Any(p => p.ProductId == productId))
+                if (customer.Products.Any(p => p.ProductId == ProductId))
                 {
                     TempData["message"] = "This product is already registered to the customer.";
-                    return RedirectToAction("Register", new { id = customerId });
+                    return RedirectToAction("Register", new { id = custId });
                 }
                 else
                 {
@@ -121,8 +122,7 @@ namespace Chapter_3.Controllers
                 CustomerData.Update(customer);
                 CustomerData.Save();
             }
-
-            return RedirectToAction("Registration", new { id = customerId });
+           return RedirectToAction("Register", new { id = customerId });
         }
     }
 }
