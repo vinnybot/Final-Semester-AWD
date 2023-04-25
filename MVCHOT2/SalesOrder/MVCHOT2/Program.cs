@@ -1,13 +1,26 @@
 using Microsoft.EntityFrameworkCore;
-using MVCHOT2.Models;
+using Microsoft.AspNetCore.Identity;
+using MVCHOT2.Models.DomainModels;
+using MVCHOT2.Models.DataLayer;
+using Bookstore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 //Add EF Core Dependency Injection
 builder.Services.AddDbContext<SalesOrderContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SalesOrderContext")));
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<SalesOrderContext>().AddDefaultTokenProviders();
 
 builder.Services.AddRouting(options =>
 {
@@ -30,7 +43,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
+}
+
+app.UseSession();
 
 app.MapAreaControllerRoute(
     name: "admin",

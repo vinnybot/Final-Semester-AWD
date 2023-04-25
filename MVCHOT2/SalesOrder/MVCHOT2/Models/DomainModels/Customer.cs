@@ -1,4 +1,4 @@
-﻿namespace MVCHOT2.Models
+﻿namespace MVCHOT2.Models.DomainModels
 {
     public class Customer
     {
@@ -14,7 +14,7 @@
 
         public string CustomerState { get; set; } = string.Empty;
 
-        public string CustomerZipCode { get; set;} = string.Empty;
+        public string CustomerZipCode { get; set; } = string.Empty;
 
         public string CustomerPhoneNumber { get; set; } = string.Empty;
     }

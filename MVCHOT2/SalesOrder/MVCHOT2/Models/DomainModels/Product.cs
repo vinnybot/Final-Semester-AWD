@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace MVCHOT2.Models
+namespace MVCHOT2.Models.DomainModels
 {
     public class Product
     {
@@ -33,5 +33,7 @@ namespace MVCHOT2.Models
         public Category Category { get; set; } = null!;
 
         public string Slug => ProductName?.Replace(' ', '-').ToLower() + '-' + ProductPrice?.ToString();
+
+        public ICollection<Product> Products { get; set; }
     }
 }

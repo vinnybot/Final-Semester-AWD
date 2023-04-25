@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MVCHOT2.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MVCHOT2.Models.DataLayer;
+using MVCHOT2.Models.DomainModels;
+using System.Data;
 
 namespace MVCHOT2.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class CustomerController : Controller
     {

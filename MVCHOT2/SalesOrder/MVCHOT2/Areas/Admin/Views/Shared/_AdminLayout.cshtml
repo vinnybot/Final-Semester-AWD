@@ -1,52 +1,43 @@
 ﻿@{
-    string controller =
-        ViewContext.RouteData.Values["controller"].ToString();
-    string action =
-        ViewContext.RouteData.Values["action"].ToString();
+    Layout = "_Layout";
+
+    var current = ViewContext.RouteData.Values["controller"]!.ToString() ?? "";
 }
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SalesOrderApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MVCHOT2.styles.css" asp-append-version="true" />
-</head>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-            <a class="navbar-brand" href="/">Sales Order - Admin</a>
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav me-auto">
-                    <a class="nav-link
-                      @(controller == "Home" && action == "Index" ? "active" : "")"
-                        asp-controller="Home" asp-action="Index">Admin</a>
-                    <a class="nav-link
-                      @(controller == "Product" ? "active" : "")"
-                       asp-controller="Product" asp-action="List">Products</a>
-                    <a class="nav-link
-                      @(controller == "Category" ? "active" : "")"
-                        asp-controller="Category" asp-action="List">Categories</a>
-                    <a class="nav-link
-                      @(controller == "Customer" ? "active" : "")"
-                       asp-controller="Customer" asp-action="List">Customer</a>
-                </div>
-                <div class="navbar-nav navbar-right">
-                    <a class="nav-link"
-                       asp-area="" asp-controller="Home" asp-action="Index">View Site</a>
-                </div>
-            </nav>
-    </nav>
-</header>
-<main>
+
+<ul class="nav nav-tabs mt-2 mb-3">
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="Home"
+           class="nav-link @Nav.Active("Home", current)">
+            Home
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-action="List" asp-controller="Customer"
+           class="nav-link @Nav.Active("Author", current)">
+            Manage Customers
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-action="List" asp-controller="Product"
+           class="nav-link @Nav.Active("Product", current)">
+            Manage Products
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-action="List" asp-controller="Category"
+           class="nav-link @Nav.Active("Category", current)">
+            Manage Categories
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-action="Index" asp-controller="User"
+           class="nav-link @Nav.Active("User", current)">
+            Manage Users
+        </a>
+    </li>
+</ul>
+
     @RenderBody()
-</main>
 
 @section scripts{
     @RenderSection("scripts", required:false)

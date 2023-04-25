@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MVCHOT2.Models;
 using Microsoft.EntityFrameworkCore;
+using MVCHOT2.Models.DomainModels;
+using MVCHOT2.Models.DataLayer;
 
 namespace MVCHOT2.Controllers
 {
