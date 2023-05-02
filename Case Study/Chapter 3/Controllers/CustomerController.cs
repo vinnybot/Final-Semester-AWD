@@ -1,9 +1,11 @@
 ﻿using Chapter_3.Models.DataAccess;
 using Chapter_3.Models.DomainModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chapter_3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
         private Repository<Customer> CustomerData { get; set; }

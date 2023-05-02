@@ -1,9 +1,10 @@
 ﻿using Chapter_3.Models.DataAccess.Configuration;
 using Chapter_3.Models.DomainModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace Chapter_3.Models.DataAccess
 {
-    public class SportsProContext : DbContext
+    public class SportsProContext : IdentityDbContext<User>
     {
         public SportsProContext(DbContextOptions<SportsProContext> options) : base(options)
         { }
@@ -19,6 +20,7 @@ namespace Chapter_3.Models.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
            
 
             modelBuilder.Entity<Technician>().HasData(

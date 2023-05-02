@@ -30,8 +30,16 @@
                 <td>@customer.Name</td>
                 <td>@customer.Email</td>
                 <td>@customer.City</td>
-                <td><a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId" class="btn btn-dark">Edit</a></td>
-                <td><a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerId" class="btn btn-dark">Delete</a></td>
+                <td>
+                    <a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerId" class="btn btn-primary w-100">
+                    Edit
+                    </a>
+                </td>
+                <td>
+                    <a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerId" class="btn btn-primary w-100">
+                    Delete
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

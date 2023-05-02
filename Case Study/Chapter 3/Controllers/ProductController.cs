@@ -3,9 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Chapter_3.Models.DomainModels;
 using Chapter_3.Models.DataAccess;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Chapter_3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private Repository<Product> ProductData { get; set; }

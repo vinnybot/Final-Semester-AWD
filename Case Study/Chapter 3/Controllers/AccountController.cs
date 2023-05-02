@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Chapter_3.Models.DomainModels;
+using Chapter_3.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using MVCHOT2.Models.DomainModels;
-using MVCHOT2.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MVCHOT2.Controllers
+namespace Chapter_3.Controllers
 {
     public class AccountController : Controller
     {
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
-        
+
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.userManager = userManager;
@@ -36,11 +35,12 @@ namespace MVCHOT2.Controllers
                 var user = new User { UserName = model.UserName };
                 var result = await userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded) 
+                if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
-                } else
+                }
+                else
                 {
                     foreach (var error in result.Errors)
                     {
@@ -71,13 +71,14 @@ namespace MVCHOT2.Controllers
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: model.RememberMe, lockoutOnFailure: false);
-                
+
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
-                    } else
+                    }
+                    else
                     {
                         return RedirectToAction("Index", "Home");
                     }

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MVCHOT2.Models.DomainModels;
+﻿using Chapter_3.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bookstore.Models
 {

@@ -7,6 +7,10 @@
     ViewContext.RouteData.Values["area"]?.ToString() ?? "";
 }
 
+@using Microsoft.AspNetCore.Identity
+@using Chapter_3.Models.DomainModels
+@inject SignInManager<User> signInManager
+
 <!DOCTYPE html>
 
 <html>
@@ -14,9 +18,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/StyleSheet.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <script defer src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
         li{list-style-type:none;}
@@ -31,45 +36,70 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
+
                     <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Home" && action == "Index" ? "active" : "")" 
-                            asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Product" ? "active" : "")"
-                            asp-controller="Product" asp-action="List">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Technician" ? "active" : "")"
-                            asp-controller="Technician" asp-action="List">Technicians</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Customer" ? "active" : "")"
-                            asp-controller="Customer" asp-action="List">Customers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Incident" ? "active" : "")"
-                            asp-controller="Incident" asp-action="List">Incidents</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link
-                            @(controller == "Registration" ? "active" : "")"
-                            asp-controller="Registration" asp-action="Index">Registrations</a>
-                        </li>
-                     
-                    </ul>
-                    
                     <li class="nav-item">
-                        <a class="nav-link" id="aboutText" asp-action="Index">About</a>
+                        <a class="nav-link @Nav.Active("Home", area)" 
+                            asp-action="Index" asp-controller="Home" asp-area="">
+                            <span class="fas fa-home"></span>&nbsp;Home
+                        </a>
                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Product", area)"
+                               asp-controller="Product" asp-action="List"><i class="fa-solid fa-magnifying-glass"></i> Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Technician", area)"
+                               asp-controller="Technician" asp-action="List"><i class="fa-solid fa-desktop"></i> Technicians</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Customer", area)"
+                               asp-controller="Customer" asp-action="List"><i class="fa-solid fa-users"></i> Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Incident", area)"
+                               asp-controller="Incident" asp-action="List"><i class="fa-solid fa-book"></i> Incidents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Registration", area)"
+                               asp-controller="Registration" asp-action="Index"><i class="fa-solid fa-user-plus"></i> Registrations</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto fs-5">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
+                                    <input type="submit" value="Log Out" class="btn btn-outline-light" />
+                                </form>
+                                <span class="text-light mx-3">@User.Identity.Name</span>
+                            </li>
+                        }
+                        else
+                        {
+                            //get current action
+                            var userAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+                            //anonymous user - Register link and log in button
+                            <li class="nav-item @Nav.Active("Register", userAction)">
+                                <a asp-action="Register" asp-controller="Account"
+                               asp-area="" class="nav-link mt-1">Register </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Login" asp-controller="Account"
+                               asp-area="" class="btn btn-outline-info">Login</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
-            
+                <ul class="mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link" id="aboutText" asp-action="About" asp-controller="Home" asp-area="">
+                            <i class="fas fa-info-circle"></i> About
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
 

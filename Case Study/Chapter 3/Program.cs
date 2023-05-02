@@ -1,4 +1,7 @@
+using Bookstore.Models;
 using Chapter_3.Models.DataAccess;
+using Chapter_3.Models.DomainModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,13 @@ builder.Services.AddControllersWithViews();
 
 //Add EF Core Dependency Injection
 builder.Services.AddDbContext<SportsProContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SportsProContext")));
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<SportsProContext>().AddDefaultTokenProviders();
 
 builder.Services.AddRouting(options =>
 {
@@ -33,7 +43,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+
+app.UseAuthentication();
 app.UseAuthorization();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
+}
 
 app.MapControllerRoute(
     name: "default",

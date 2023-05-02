@@ -1,11 +1,14 @@
 ﻿using Chapter_3.Models.DataAccess;
 using Chapter_3.Models.DomainModels;
 using Chapter_3.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Chapter_3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TechIncidentController : Controller
     {
         private const string TECH_KEY = "techID";

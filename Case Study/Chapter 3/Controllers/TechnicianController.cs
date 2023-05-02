@@ -1,10 +1,13 @@
 ﻿using Chapter_3.Models.DataAccess;
 using Chapter_3.Models.DomainModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Chapter_3.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TechnicianController : Controller
     {
         //private SportsProContext context { get; set; }

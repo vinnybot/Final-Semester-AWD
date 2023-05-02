@@ -11,6 +11,12 @@ namespace Chapter_3.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Index(CaseStudyModel model)
         {
