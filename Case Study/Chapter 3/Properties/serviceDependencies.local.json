@@ -5,9 +5,9 @@
     },
     "mssql2": {
       "secretStore": "LocalSecretsFile",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/vinnybotsportspro/databases/SportsPro",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/vinnybotsportspro/databases/SportsPro",
       "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:SportsProApp"
+      "connectionId": "ConnectionStrings:vinnybotSPA"
     }
   }
 }
